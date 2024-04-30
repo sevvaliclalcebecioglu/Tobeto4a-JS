@@ -1,0 +1,11 @@
+{
+  "name": "Tobeto 4A JS",
+
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
