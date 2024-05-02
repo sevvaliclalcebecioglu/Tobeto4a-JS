@@ -272,3 +272,69 @@ console.log("Spread: ", arrayExample2);
 // const objectExample2 = Object.assign({}, objectExample, { age: 30, identity: "1234567890" })
 const objectExample2 = { ...objectExample, age: 30, identity: "1234567890" }; // Yeni bir referans oluşturur
 console.log("Spread: ", objectExample2);
+
+//#endregion
+
+//#region Error Handling
+try {
+  throw new Error("Error");
+} catch (error) {
+  console.log(error);
+} finally {
+  console.log("Finally");
+}
+//#endregion
+
+//#region OOP
+
+// Abstract Class
+class Human {
+  // Abstract Method
+  getName() {
+    throw new Error("You have to implement the method");
+  }
+}
+
+class Person extends Human { // OOP'nin 1. özelliği Sınıf ve Nesneler
+  _name;
+  _age;
+
+  constructor(name, age) {
+    super(); // Abstract sınıfın constructor'ını çağırır
+    // this: Oluşturulan nesneyi temsil eder
+    this._name = name;
+    this._age = age;
+  }
+
+  getName() { // OOP'nin 2. özelliği Kapsülleme
+    return this._name;
+  }
+}
+
+class Student extends Person { // OOP'nin 3. özelliği Kalıtım
+  _school;
+
+  constructor(name, age, school) {
+    // super: Üst sınıfı gösterir
+    super(name, age); // Üst sınıfın constructor'ını çağırır
+
+    // this.getName(); // Üst sınıfın metotlarını çağırabilir
+    // super.getName(); // Üst sınıfın metotlarını çağırabilir
+
+    this._school = school;
+  }
+
+  // Overriding: Üst sınıftaki metodu ezer
+  getName() { // OOP'nin 4. özelliği Polimorfizm (Çok biçimlilik) : Aynı isimde farklı işlev
+    return "Öğrenci: " + super.getName(); // Üst sınıfın metotlarını çağırabilir
+  }
+
+  getSchool() {
+    return this._school;
+  }
+}
+
+const human = (new Student("Ahmet", 25));
+console.log(human.getName());
+
+//#endregion
