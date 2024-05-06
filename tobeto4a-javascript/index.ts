@@ -96,7 +96,7 @@ const objectExample : {
   name: string,
   surname: string,
   age: number,
-  isStudent: boolean,
+  isStudent: boolean | undefined,
   address: {
     city: string,
     district: string,
@@ -333,7 +333,7 @@ console.log("Destructuring: ", userName, age, city);
 
 // const first = arrayExample[0];
 // const second = arrayExample[1];
-const [first, second, ...rest] = arrayExample; // [1, "ahmet", true, {}, null, "yeni eleman"]
+const [first, second, ...rest] : unknown[] = arrayExample; // [1, "ahmet", true, {}, null, "yeni eleman"]
 console.log("Destructuring: ", first, second, rest);
 
 // console.log("Spread: ", arrayExample[0], arrayExample[1], arrayExample[2], arrayExample[3], arrayExample[4], arrayExample[5]);
@@ -363,18 +363,20 @@ try {
 
 //#region OOP
 
+// metodlara veya class'lara da abstract diye belirtebiliyoruz .
+
 // Abstract Class
-class Human {
+abstract class Human {
   // Abstract Method
-  getName() {
-    throw new Error("You have to implement the method");
-  }
+  abstract getName(); 
 }
+
+// TypeScripte private - public diye tip ataması da yapabilirim . 
 
 class Person extends Human { // OOP'nin 1. özelliği Sınıf ve Nesneler
   // başına "_" koyduğumuz zaman sözel olarak private olduğunu belirtmiş oluyoruz. 
-  _name;
-  _age;
+  private _name : string;
+  protected _age : string;
 
   constructor(name, age) {
     super(); // Abstract sınıfın constructor'ını çağırır
@@ -383,10 +385,14 @@ class Person extends Human { // OOP'nin 1. özelliği Sınıf ve Nesneler
     this._age = age;
   }
 
-  getName() { // OOP'nin 2. özelliği Kapsülleme
+  // Varsayılan (typescripte) erişim belirteci : public'dir . Yazmasamda olur . 
+
+  override getName() { // OOP'nin 2. özelliği Kapsülleme
     return this._name;
   }
 }
+
+// implements : Bir interface'in veya sınıfın içindeki property ve metotları implement edilmesini sağlar . 
 
 class Student extends Person { // OOP'nin 3. özelliği Kalıtım
   _school;
@@ -422,6 +428,12 @@ class Student extends Person { // OOP'nin 3. özelliği Kalıtım
 
 // TypeScript geliştirme ortamı için olan betik bir dildir .
 
+// Daha sonrada değiştirebilmek için let kullandım .
 
+let human : Human = new Student("İclal", 21, "Atatürk Üniversitesi");
+console.log(human.getName());
+
+const human2 : Human = new Person("Sema", 45);
+console.log(human2.getName());
 
 //#endregion 
